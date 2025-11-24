@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cascos Inteligentes — Tienda Demo</title>
+  <meta name="description" content="Página de presentación de 3 cascos inteligentes: Básico, Avanzado y Premium. Comparativa y detalles en español." />
+  <style>
+    * {box-sizing: border-box; margin:0; padding:0; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#7c3aed; --glass: rgba(255,255,255,0.06);
+      --glass-2: rgba(255,255,255,0.03);
+    }
+    body{
+      background: linear-gradient(180deg,#071025 0%, #071028 60%);
+      color: #e6eef8;
+      padding: 32px;
+    }
+    .container { max-width:1100px; margin:0 auto; }
+    header{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:28px; }
+    .brand{ display:flex; align-items:center; gap:12px; }
+    .logo{ width:56px; height:56px; border-radius:12px; background:linear-gradient(135deg,var(--accent), #4f46e5);
+      display:flex; align-items:center; justify-content:center; font-weight:700; color:white; }
+    h1{ font-size:20px; }
+    p.lead{ color:var(--muted); font-size:14px; margin-top:6px; }
+    .grid { display:grid; grid-template-columns: repeat(3,1fr); gap:18px; margin:18px 0 26px 0; }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px; padding:18px; box-shadow: 0 6px 20px rgba(2,6,23,0.6); border: 1px solid var(--glass-2);
+      display:flex; flex-direction:column; gap:12px; }
+    .product-figure { display:flex; align-items:center; justify-content:center; padding:6px 0; }
+    .product-title { font-weight:700; font-size:16px; }
+    .price { font-weight:800; font-size:20px; color:var(--accent); }
+    .features { color:var(--muted); font-size:13px; line-height:1.5; margin-top:6px; }
+    .cta-row { display:flex; gap:8px; margin-top:auto; }
+    .btn { padding:10px 12px; border-radius:10px; border:none; cursor:pointer; font-weight:700;
+      background:linear-gradient(90deg,var(--accent), #4f46e5); color:white; transition:transform .12s ease; }
+    .btn.secondary { background:transparent; border:1px solid var(--glass); color:var(--muted); }
+    .btn:active { transform: translateY(1px) }
+    .compare { margin-top:18px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border-radius:12px; padding:14px; border:1px solid var(--glass-2); }
+    table { width:100%; border-collapse:collapse; color:#dbeafe; font-size:14px; }
+    th, td { padding:10px 8px; text-align:center; border-bottom:1px dashed rgba(255,255,255,0.03); }
+    th { color:var(--muted); font-weight:700; font-size:13px; }
+    .badge { font-size:12px; padding:6px 8px; border-radius:999px; background:rgba(255,255,255,0.04); color:var(--muted); }
+    footer { margin-top:28px; color:var(--muted); font-size:13px; text-align:center; }
+    @media (max-width:900px){ .grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width:640px){ header { flex-direction:column; align-items:flex-start; gap:10px; }
+      .grid { grid-template-columns: 1fr; } .cta-row { flex-direction:column; } }
+    .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+      background: rgba(2,6,23,0.7); z-index:9999; }
+    .modal.open { display:flex; }
+    .modal .sheet { background: #071028; padding:18px; border-radius:12px; max-width:920px; width:96%; }
+    .modal button.close { float:right; background:transparent; color:var(--muted); border:none; font-weight:700; cursor:pointer; }
+    .muted-small { color:var(--muted); font-size:12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">CI</div>
+        <div>
+          <h1>Cascos Inteligentes — Colección 2025</h1>
+          <p class="lead">Tres niveles: <strong>Básico</strong>, <strong>Avanzado</strong> y <strong>Premium</strong>.</p>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="badge">Envío gratuito | 30 días garantía</div>
+        <div class="muted-small" style="margin-top:6px">Contacto: ventas@cascosdemo.mx</div>
+      </div>
+    </header>
+
+    <!-- Grid de productos -->
+    <section class="grid">
+      <!-- Casco 1 -->
+      <article class="card" id="casco-basico">
+        <div class="product-figure">
+          <img src="aste/i.png" alt="Casco inteligente básico" style="max-width:160px; border-radius:12px;"/>
+        </div>
+        <h2 class="product-title">Casco Básico</h2>
+        <div class="price">$1,299</div>
+        <div class="features">
+          <ul>
+            <li>Mica transparente con pantalla básica.</li>
+            <li>Asistente por voz (funciones esenciales).</li>
+            <li>Material ligero y ventilación optimizada.</li>
+          </ul>
+        </div>
+        <div class="cta-row">
+          <button class="btn" onclick="abrirModal('Casco Básico','Incluye asistente básico y mica transparente. Precio $1,299.')">Ver más</button>
+          <button class="btn secondary">Comprar</button>
+        </div>
+      </article>
+
+      <!-- Casco 2 -->
+      <article class="card" id="casco-avanzado">
+        <div class="product-figure">
+          <img src="aste/2.png" alt="Casco inteligente avanzado" style="max-width:160px; border-radius:12px;"/>
+        </div>
+        <h2 class="product-title">Casco Avanzado</h2>
+        <div class="price">$2,499</div>
+        <div class="features">
+          <ul>
+            <li>Mica tecnológica con HUD.</li>
+            <li>Asistente inteligente con reconocimiento contextual.</li>
+            <li>Sensores de impacto y conectividad Bluetooth.</li>
+          </ul>
+        </div>
+        <div class="cta-row">
+          <button class="btn" onclick="abrirModal('Casco Avanzado','Mica HUD, asistente inteligente y sensores de impacto. Precio $2,499.')">Ver más</button>
+          <button class="btn secondary">Comprar</button>
+        </div>
+      </article>
+
+      <!-- Casco 3 -->
+      <article class="card" id="casco-premium">
+        <div class="product-figure">
+          <img src="imagenes/casco-premium.png" alt="Casco inteligente premium" style="max-width:160px; border-radius:12px;"/>
+        </div>
+        <h2 class="product-title">Casco Premium</h2>
+        <div class="price">$4,999</div>
+        <div class="features">
+          <ul>
+            <li>Mica inteligente con AR avanzado.</li>
+            <li>Asistente premium con integración de apps.</li>
+            <li>Sensores de seguridad y telemetría.</li>
+            <li>Batería de larga duración.</li>
+          </ul>
+        </div>
+        <div class="cta-row">
+          <button class="btn" onclick="abrirModal('Casco Premium','Incluye AR avanzado, telemetría y batería de alta duración. Precio $4,999.')">Ver más</button>
+          <button class="btn secondary">Comprar</button>
+        </div>
+      </article>
+    </section>
+
+    <!-- Comparativa -->
+    <section class="compare">
+      <h3>Comparativa rápida</h3>
+      <table>
+        <thead>
+          <tr><th>Característica</th><th>Básico</th><th>Avanzado</th><th>Premium</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Visor</td><td>Transparente</td><td>Tecnológico</td><td>AR avanzado</td></tr>
+          <tr><td>Asistente</td><td>Básico</td><td>Inteligente</td><td>Premium</td></tr>
+          <tr><td>Sensores</td><td>—</td><td>Impacto / Bluetooth</td><td>Telemetría, caídas</td></tr>
+          <tr><td>Batería</td><td>4–6 h</td><td>6–10 h</td><td>10–18 h</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      © 2025 Cascos Demo — Hecho en México
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="sheet">
+      <button class="close" onclick="cerrarModal()">✕</button>
+      <h3 id="modal-title">Título</h3>
+      <p id="modal-body" style="margin-top:8px; color:var(--muted)">Descripción</p>
+    </div>
+  </div>
+
+  <script>
+    function abrirModal(titulo, descripcion){
+      const modal = document.getElementById('modal');
+      document.getElementById('modal-title').innerText = titulo;
+      document.getElementById('modal-body').innerText = descripcion;
+      modal.classList.add('open');
+    }
+    function cerrarModal(){
+      document.getElementById('modal').classList.remove('open');
+    }
+  </script>
+</body>
+</html>
